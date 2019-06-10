@@ -2,7 +2,7 @@
 /**
  * JWT auth functions
  *
- * @package HeadlessWP
+ * @package Guillotine
  * @since 1.0.0
  */
 
@@ -19,7 +19,7 @@ define( "HEADLESSWP_JWT_ALGORITHM", "HS256" );
  * @param int $ttl The token's time-to-live in seconds.
  * @return string The newly created jwt token.
  */
-function headlesswp_jwt_create_token( $scopes, $ttl ) {
+function guillotine_jwt_create_token( $scopes, $ttl ) {
   $issuedAt = time();
   $expirationTime = $issuedAt + $ttl;
   $payload = array(
@@ -42,13 +42,13 @@ function headlesswp_jwt_create_token( $scopes, $ttl ) {
  * @param array $scopes The scopes the token is expected to have.
  * @return bool|WP_ERROR Return true if token is valid or return WP_ERROR if token is invalid.
  */
-function headlesswp_jwt_validate_token( $jwt, $scopes ) {
+function guillotine_jwt_validate_token( $jwt, $scopes ) {
   try {
-    $payload = headlesswp_jwt_decode_token( $jwt );
+    $payload = guillotine_jwt_decode_token( $jwt );
     if ( is_wp_error($payload) ) {
       return $payload;
     }
-    return headlesswp_jwt_check_scopes( $payload, $scopes );
+    return guillotine_jwt_check_scopes( $payload, $scopes );
   } catch (Exception $e) {
     return new WP_ERROR('Invalid token', $e->getMessage());
   }
@@ -60,7 +60,7 @@ function headlesswp_jwt_validate_token( $jwt, $scopes ) {
  * @param string $jwt The JWT token to be decoded.
  * @return object|WP_ERROR Return the JWT payload object on success or WP_ERROR.
  */
-function headlesswp_jwt_decode_token( $jwt ) {
+function guillotine_jwt_decode_token( $jwt ) {
   try {
     $payload = JWT::decode( $jwt, HEADLESSWP_JWT_KEY, array( HEADLESSWP_JWT_ALGORITHM ) );
     return $payload;
@@ -76,7 +76,7 @@ function headlesswp_jwt_decode_token( $jwt ) {
  * @param array $scopes The scopes the token is expected to have.
  * @return void
  */
-function headlesswp_jwt_check_scopes( $payload, $scopes ) {
+function guillotine_jwt_check_scopes( $payload, $scopes ) {
   if ( count( $scopes ) !== count( array_intersect( $scopes, $payload->scopes ) ) ) {
     throw new Exception( "Token does not have the proper scopes." );
   }

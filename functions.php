@@ -1,8 +1,8 @@
 <?php
 /**
- * Headless WP functions and definitions
+ * Guillotine functions and definitions
  *
- * @package HeadlessWP
+ * @package Guillotine
  * @since 1.0.0
  */
 
@@ -19,7 +19,7 @@ require_once get_template_directory() . '/inc/jwt.php';
 require get_template_directory() . '/inc/http-headers.php';
 
 // Preview customizations.
-require_once get_template_directory() . '/inc/headless-links.php';
+require_once get_template_directory() . '/inc/links.php';
 
 // CloudFront cache invalidation
 require_once get_template_directory() . '/inc/cloudfront.php';

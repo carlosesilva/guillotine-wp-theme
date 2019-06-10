@@ -2,11 +2,11 @@
 /**
  * Menus route
  *
- * @package HeadlessWP
+ * @package Guillotine
  * @since 1.0.0
  */
 
-class HeadlessWP_Menus_Controller extends WP_REST_Controller {
+class Guillotine_Menus_Controller extends WP_REST_Controller {
 
   /**
    * REST API route base

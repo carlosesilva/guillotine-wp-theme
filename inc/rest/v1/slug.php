@@ -1,6 +1,6 @@
 <?php
 
-class HeadlessWP_Preview_Route extends WP_REST_Controller {
+class Guillotine_Preview_Route extends WP_REST_Controller {
   // /**
   //  * Constructor
   //  */

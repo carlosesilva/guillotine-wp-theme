@@ -2,11 +2,11 @@
 /**
  * Preview route
  *
- * @package HeadlessWP
+ * @package Guillotine
  * @since 1.0.0
  */
 
-class HeadlessWP_Previews_Controller extends WP_REST_Controller {
+class Guillotine_Previews_Controller extends WP_REST_Controller {
 
   /**
    * REST API route base
@@ -93,7 +93,7 @@ class HeadlessWP_Previews_Controller extends WP_REST_Controller {
     }
 
     $scopes = array( 'preview', 'preview_' . $post_id );
-    $is_valid_token = headlesswp_jwt_validate_token( $jwt, $scopes );
+    $is_valid_token = guillotine_jwt_validate_token( $jwt, $scopes );
 
     if ( is_wp_error( $is_valid_token ) ) {
       return new WP_Error('rest_jwt_unauthorized', $is_valid_token->get_error_message(), array(

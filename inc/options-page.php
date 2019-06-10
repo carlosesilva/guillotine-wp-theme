@@ -2,7 +2,7 @@
 /**
  * Configure theme acf options page.
  *
- * @package HeadlessWP
+ * @package Guillotine
  * @since 1.0.0
  */
 

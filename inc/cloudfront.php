@@ -2,7 +2,7 @@
 /**
  * CloudFront cache invalidation
  *
- * @package HeadlessWP
+ * @package Guillotine
  * @since 1.0.0
  */
 

@@ -2,7 +2,7 @@
 /**
  * HTTP Headers customizations
  *
- * @package Headless_WP
+ * @package Guillotine
  */
 
 /**
@@ -26,9 +26,9 @@ add_filter( 'wp_headers', 'allconnect_filter_wp_headers', 10, 1 );
  * @param array $urls The list of CORS allowed urls.
  * @return array The filtered array.
  */
-function headlesswp_allowed_origins($urls) {
+function guillotine_allowed_origins($urls) {
   $frontend_url = get_field('frontend_url', 'option');
   $urls[] = $frontend_url;
   return $urls;
 }
-add_filter('allowed_http_origins', 'headlesswp_allowed_origins');
+add_filter('allowed_http_origins', 'guillotine_allowed_origins');

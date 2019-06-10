@@ -1,6 +1,6 @@
 {
-    "name": "rv/headless-wp",
-    "description": "A headless WordPress theme",
+    "name": "rv/guillotine",
+    "description": "A guillotine WordPress theme",
     "require": {
         "firebase/php-jwt": "^5.0"
     },
