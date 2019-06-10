@@ -9,8 +9,8 @@
 use \Firebase\JWT\JWT;
 
 // Define JWT constants.
-define( "HEADLESSWP_JWT_KEY", get_field('jwt_secret_key', 'option' ) );
-define( "HEADLESSWP_JWT_ALGORITHM", "HS256" );
+define( "GUILLOTINE_JWT_KEY", get_field('jwt_secret_key', 'option' ) );
+define( "GUILLOTINE_JWT_ALGORITHM", "HS256" );
 
 /**
  * Create JWT token
@@ -30,7 +30,7 @@ function guillotine_jwt_create_token( $scopes, $ttl ) {
     "scopes" => $scopes,
   );
 
-  $jwt = JWT::encode( $payload, HEADLESSWP_JWT_KEY );
+  $jwt = JWT::encode( $payload, GUILLOTINE_JWT_KEY );
 
   return $jwt;
 }
@@ -62,7 +62,7 @@ function guillotine_jwt_validate_token( $jwt, $scopes ) {
  */
 function guillotine_jwt_decode_token( $jwt ) {
   try {
-    $payload = JWT::decode( $jwt, HEADLESSWP_JWT_KEY, array( HEADLESSWP_JWT_ALGORITHM ) );
+    $payload = JWT::decode( $jwt, GUILLOTINE_JWT_KEY, array( GUILLOTINE_JWT_ALGORITHM ) );
     return $payload;
   } catch (Exception $e) {
     return new WP_ERROR('Invalid token', $e->getMessage());
