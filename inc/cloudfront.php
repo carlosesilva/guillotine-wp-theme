@@ -26,8 +26,8 @@ function cloudfront_cache_invalidator() {
 	<script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', () => {
 		// Some global vars
-		const cacheInvalidationEndpoint = '<?php echo get_field('cache_invalidation_endpoint', 'option' ); ?>';
-		const cacheInvalidationStatusEndpoint       = '<?php echo get_field('cache_invalidation_status_endpoint', 'option' ); ?>';
+g		const cacheInvalidationEndpoint = '<?php echo get_field('cache_invalidation_endpoint', 'option' ); ?>';
+		const cacheInvalidationStatusEndpoint = '<?php echo get_field('cache_invalidation_status_endpoint', 'option' ); ?>';
 		let interval;
 
 		// DOM Elements
