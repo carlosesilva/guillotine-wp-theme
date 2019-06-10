@@ -1,8 +1,10 @@
 {
     "name": "rv/guillotine",
-    "description": "A guillotine WordPress theme",
+    "type": "wordpress-theme",
+    "description": "A headless WordPress theme",
     "require": {
-        "firebase/php-jwt": "^5.0"
+        "firebase/php-jwt": "^5.0",
+        "composer/installers": "^1.6"
     },
     "authors": [
         {
