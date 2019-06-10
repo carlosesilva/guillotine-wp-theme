@@ -7,7 +7,11 @@
  */
 
 // Composer autoload.
-require __DIR__ . '/vendor/autoload.php';
+if (file_exists(__DIR__ . '/vendor')) {
+  require __DIR__ . '/vendor/autoload.php';
+} else {
+  require ABSPATH . '/vendor/autoload.php';
+}
 
 // ACF Options page.
 require_once get_template_directory() . '/inc/options-page.php';
