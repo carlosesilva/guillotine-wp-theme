@@ -26,10 +26,8 @@ function cloudfront_cache_invalidator() {
 	<script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', () => {
 		// Some global vars
-		const cacheBaseUrl         = 'https://at38idql6j.execute-api.us-east-1.amazonaws.com';
-		const gatewayStage         = 'development';
-		const cacheInvalidationUrl = `${cacheBaseUrl}/${gatewayStage}/clearcache`;
-		const cacheStatusUrl       = `${cacheBaseUrl}/${gatewayStage}/status`;
+		const cacheInvalidationEndpoint = '<?php echo get_field('cache_invalidation_endpoint', 'option' ); ?>';
+		const cacheInvalidationStatusEndpoint       = '<?php echo get_field('cache_invalidation_status_endpoint', 'option' ); ?>';
 		let interval;
 
 		// DOM Elements
@@ -46,7 +44,7 @@ function cloudfront_cache_invalidator() {
 			loadingText.style.display = 'block';
 
 			// Fire off the request
-			fetch(cacheInvalidationUrl)
+			fetch(cacheInvalidationEndpoint)
 				.then(response => response.json())
 				.then(response => {
 					if (!response.invalidationId) {
@@ -71,7 +69,7 @@ function cloudfront_cache_invalidator() {
 		// Checks the invalidation status. Once it's complete, will notify the user.
 		const checkInvalidation = (invalidationId) => {
 			// If we have an invalidationId, go ahead and fire off the request
-			var url = `${cacheStatusUrl}/${invalidationId}`;
+			var url = `${cacheInvalidationStatusEndpoint}/${invalidationId}`;
 			fetch(url)
 				.then(response => response.json())
 				.then(response => {
