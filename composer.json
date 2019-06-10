@@ -1,0 +1,13 @@
+{
+    "name": "rv/headless-wp",
+    "description": "A headless WordPress theme",
+    "require": {
+        "firebase/php-jwt": "^5.0"
+    },
+    "authors": [
+        {
+            "name": "Carlos E. Silva",
+            "email": "casilva@redventures.com"
+        }
+    ]
+}
