@@ -16,10 +16,7 @@ if (file_exists(__DIR__ . '/vendor')) {
 }
 
 // Options page.
-require_once get_template_directory() . '/inc/options/main.php';
-
-// ACF Options page.
-require_once get_template_directory() . '/inc/options-page.php';
+require_once get_template_directory() . '/inc/settings/main.php';
 
 // JWT auth functions.
 require_once get_template_directory() . '/inc/jwt.php';
