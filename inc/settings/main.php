@@ -14,7 +14,6 @@ class Guillotine_Settings {
 				'order'             => '10',
 				'type'              => 'text',
 				'description'       => 'The url to the headless frontend.',
-				'sanitize_callback' => 'sanitize_text_field',
 				'show_in_rest'      => true,
 				'default'           => 'http://localhost:3000',
 			),
@@ -23,7 +22,6 @@ class Guillotine_Settings {
 				'order'             => '20',
 				'type'              => 'password',
 				'description'       => 'The secret used to encrypt the JWT tokens.',
-				'sanitize_callback' => 'sanitize_text_field',
 				'show_in_rest'      => true,
 				'default'           => '',
 			),
@@ -34,7 +32,6 @@ class Guillotine_Settings {
 				'order'             => '10',
 				'type'              => 'textarea',
 				'description'       => '',
-				'sanitize_callback' => 'sanitize_text_field',
 				'show_in_rest'      => true,
 				'default'           => '',
 			),
@@ -43,7 +40,6 @@ class Guillotine_Settings {
 				'order'             => '30',
 				'type'              => 'email',
 				'description'       => '',
-				'sanitize_callback' => 'sanitize_text_field',
 				'show_in_rest'      => true,
 				'default'           => '',
 			),
@@ -52,7 +48,6 @@ class Guillotine_Settings {
 				'order'             => '20',
 				'type'              => 'url',
 				'description'       => '',
-				'sanitize_callback' => 'sanitize_text_field',
 				'show_in_rest'      => true,
 				'default'           => '',
 			),
@@ -117,7 +112,7 @@ class Guillotine_Settings {
 					array(
 						'type'              => $this->normalize_setting_type_for_settings_api( $args['type'] ),
 						'description'       => $args['description'],
-						'sanitize_callback' => $args['sanitize_callback'],
+						'sanitize_callback' => $this->pick_sanitize_callback_based_on_type( $args['type'] ),
 						'show_in_rest'      => $args['show_in_rest'],
 						'default'           => $args['default'],
 					)
@@ -128,11 +123,21 @@ class Guillotine_Settings {
 
 	function normalize_setting_type_for_settings_api( $type ) {
 		return array(
-			'text' => 'string',
-			'textarea' => 'string',
+			'text'     => 'string',
 			'password' => 'string',
-			'email' => 'string',
-			'url' => 'string',
+			'email'    => 'string',
+			'url'      => 'string',
+			'textarea' => 'string',
+		)[ $type ];
+	}
+
+	function pick_sanitize_callback_based_on_type( $type ) {
+		return array(
+			'text'     => 'sanitize_text_field',
+			'password' => 'sanitize_text_field',
+			'email'    => 'sanitize_email',
+			'url'      => 'sanitize_text_field',
+			'textarea' => 'sanitize_textarea_field',
 		)[ $type ];
 	}
 }
