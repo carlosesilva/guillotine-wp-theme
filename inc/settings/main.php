@@ -8,41 +8,41 @@
 
 class Guillotine_Settings {
 	private $settings = array(
-		"Headless" => array(
+		'Headless'   => array(
 			'guillotine_frontend_url' => array(
-				'name'              => 'Frontend URL',
-				'order'             => '10',
-				'type'              => 'text',
-				'description'       => 'The url to the headless frontend.',
-				'show_in_rest'      => true,
-				'default'           => 'http://localhost:3000',
+				'name'         => 'Frontend URL',
+				'order'        => '10',
+				'type'         => 'text',
+				'description'  => 'The url to the headless frontend.',
+				'show_in_rest' => true,
+				'default'      => 'http://localhost:3000',
 			),
-			'guillotine_jwt_secret' => array(
-				'name'              => 'JWT Secret',
-				'order'             => '20',
-				'type'              => 'password',
-				'description'       => 'The secret used to encrypt the JWT tokens.',
-				'show_in_rest'      => true,
-				'default'           => '',
+			'guillotine_jwt_secret'   => array(
+				'name'         => 'JWT Secret',
+				'order'        => '20',
+				'type'         => 'password',
+				'description'  => 'The secret used to encrypt the JWT tokens.',
+				'show_in_rest' => true,
+				'default'      => '',
 			),
 		),
-		"CloudFront" => array(
+		'CloudFront' => array(
 			'guillotine_cache_invalidation_endpoint' => array(
-				'name'              => 'Cache Invalidation Endpoint',
-				'order'             => '10',
-				'type'              => 'url',
-				'description'       => 'The endpoint for submitting CloudFront cache invalidation requests.',
-				'show_in_rest'      => true,
-				'default'           => '',
+				'name'         => 'Cache Invalidation Endpoint',
+				'order'        => '10',
+				'type'         => 'url',
+				'description'  => 'The endpoint for submitting CloudFront cache invalidation requests.',
+				'show_in_rest' => true,
+				'default'      => '',
 			),
 			'guillotine_cache_invalidation_status_endpoint' => array(
-				'name'              => 'Cache Invalidation Status Endpoint',
-				'order'             => '20',
-				'type'              => 'url',
-				'description'       => "The endpoint for checking a CloudFront cache invalidation request's status.",
-				'show_in_rest'      => true,
-				'default'           => '',
-			)
+				'name'         => 'Cache Invalidation Status Endpoint',
+				'order'        => '20',
+				'type'         => 'url',
+				'description'  => "The endpoint for checking a CloudFront cache invalidation request's status.",
+				'show_in_rest' => true,
+				'default'      => '',
+			),
 		),
 	);
 
@@ -70,7 +70,7 @@ class Guillotine_Settings {
 	 * @return void
 	 */
 	function guillotine_render_settings_page() {
-		if ( !current_user_can( 'manage_options' ) )  {
+		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
 
@@ -83,10 +83,14 @@ class Guillotine_Settings {
 	<div id="guillotine-settings-root"></div>
 		<?php
 		// Pass rest api info to javascript.
-		wp_localize_script( 'guillotine-settings', 'WPAPI_Config', array(
-			'endpoint' => esc_url_raw( rest_url() ),
-			'nonce' => wp_create_nonce( 'wp_rest' )
-		) );
+		wp_localize_script(
+			'guillotine-settings',
+			'WPAPI_Config',
+			array(
+				'endpoint' => esc_url_raw( rest_url() ),
+				'nonce'    => wp_create_nonce( 'wp_rest' ),
+			)
+		);
 		wp_localize_script( 'guillotine-settings', 'Guillotine_Settings_Schema', $this->settings );
 	}
 
@@ -96,8 +100,8 @@ class Guillotine_Settings {
 	 * @return void
 	 */
 	function guillotine_register_settings() {
-		foreach ($this->settings as $section => $settings) {
-			foreach ($settings as $setting => $args) {
+		foreach ( $this->settings as $section => $settings ) {
+			foreach ( $settings as $setting => $args ) {
 				register_setting(
 					'guillotine',
 					$setting,

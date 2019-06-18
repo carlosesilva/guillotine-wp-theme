@@ -6,13 +6,13 @@
  * @since 1.0.0
  */
 
-define('GUILLOTINE_VERSION', '0.0.1');
+define( 'GUILLOTINE_VERSION', '0.0.1' );
 
 // Composer autoload.
-if (file_exists(__DIR__ . '/vendor')) {
-  require_once __DIR__ . '/vendor/autoload.php';
+if ( file_exists( __DIR__ . '/vendor' ) ) {
+	require_once __DIR__ . '/vendor/autoload.php';
 } else {
-  require_once ABSPATH . '/vendor/autoload.php';
+	require_once ABSPATH . '/vendor/autoload.php';
 }
 
 // Register theme options.

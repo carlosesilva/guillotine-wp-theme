@@ -13,30 +13,30 @@
  * @return str The guillotine WordPress preview link.
  */
 function guillotine_filter_preview_link( $link, $post = null ) {
-  $frontend_url = get_option('guillotine_frontend_url');
-  
-  // Get global post if a post was not passed in.
-  if ($post === null) {
-    $post = get_post();
-  }
+	$frontend_url = get_option( 'guillotine_frontend_url' );
 
-  // Generate jwt token.
-  $scopes = array( 'preview', 'preview_' . $post->ID );
-  $ttl = 60; // Todo: pick the appropriate preview link TTL.
-  $jwt = guillotine_jwt_create_token( $scopes, $ttl );
+	// Get global post if a post was not passed in.
+	if ( $post === null ) {
+		$post = get_post();
+	}
 
-  // Set query params.
-  $params = array(
-    'token' => $jwt,
-  );
+	// Generate jwt token.
+	$scopes = array( 'preview', 'preview_' . $post->ID );
+	$ttl    = 60; // Todo: pick the appropriate preview link TTL.
+	$jwt    = guillotine_jwt_create_token( $scopes, $ttl );
 
-  // Build preview url.
-  $filtered = $frontend_url
-  . '/_preview'
-  . '/' . $post->ID
-  . '?' . build_query( $params );
+	// Set query params.
+	$params = array(
+		'token' => $jwt,
+	);
 
-  return $filtered;
+	// Build preview url.
+	$filtered = $frontend_url
+	. '/_preview'
+	. '/' . $post->ID
+	. '?' . build_query( $params );
+
+	return $filtered;
 }
 add_filter( 'preview_post_link', 'guillotine_filter_preview_link', 99, 2 );
 
@@ -47,21 +47,21 @@ add_filter( 'preview_post_link', 'guillotine_filter_preview_link', 99, 2 );
  * @return str The static permalink.
  */
 function guillotine_filter_permalink( $url, $post = null ) {
-  $frontend_url = get_option('guillotine_frontend_url');
+	$frontend_url = get_option( 'guillotine_frontend_url' );
 
-  // Get global post if a post was not passed in.  
-  if ($post === null) {
-    $post = get_post();
-  }
+	// Get global post if a post was not passed in.
+	if ( $post === null ) {
+		$post = get_post();
+	}
 
-  if ($post->post_status !== 'publish') {
-    $filtered = guillotine_filter_preview_link($url);
-    return $filtered;
-  }
+	if ( $post->post_status !== 'publish' ) {
+		$filtered = guillotine_filter_preview_link( $url );
+		return $filtered;
+	}
 
-  return $frontend_url
-    . '/post'
-    . '/' . $post->ID
-    . '/';
+	return $frontend_url
+	. '/post'
+	. '/' . $post->ID
+	. '/';
 }
 add_filter( 'post_link', 'guillotine_filter_permalink', 99, 2 );
