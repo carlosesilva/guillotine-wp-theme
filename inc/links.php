@@ -13,7 +13,7 @@
  * @return str The guillotine WordPress preview link.
  */
 function guillotine_filter_preview_link( $link, $post = null ) {
-  $frontend_url = get_field('frontend_url', 'option');
+  $frontend_url = get_option('guillotine_frontend_url');
   
   // Get global post if a post was not passed in.
   if ($post === null) {
@@ -47,7 +47,7 @@ add_filter( 'preview_post_link', 'guillotine_filter_preview_link', 99, 2 );
  * @return str The static permalink.
  */
 function guillotine_filter_permalink( $url, $post = null ) {
-  $frontend_url = get_field('frontend_url', 'option');
+  $frontend_url = get_option('guillotine_frontend_url');
 
   // Get global post if a post was not passed in.  
   if ($post === null) {

@@ -27,7 +27,7 @@ add_filter( 'wp_headers', 'allconnect_filter_wp_headers', 10, 1 );
  * @return array The filtered array.
  */
 function guillotine_allowed_origins($urls) {
-  $frontend_url = get_field('frontend_url', 'option');
+  $frontend_url = get_option('guillotine_frontend_url');
   $urls[] = $frontend_url;
   return $urls;
 }

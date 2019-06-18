@@ -10,19 +10,20 @@ define('GUILLOTINE_VERSION', '0.0.1');
 
 // Composer autoload.
 if (file_exists(__DIR__ . '/vendor')) {
-  require __DIR__ . '/vendor/autoload.php';
+  require_once __DIR__ . '/vendor/autoload.php';
 } else {
-  require ABSPATH . '/vendor/autoload.php';
+  require_once ABSPATH . '/vendor/autoload.php';
 }
 
-// Options page.
+// Register theme options.
 require_once get_template_directory() . '/inc/settings/main.php';
+// TODO: Check that certain vital settings have a value before enabling some of the other functionality
 
 // JWT auth functions.
 require_once get_template_directory() . '/inc/jwt.php';
 
 // HTTP headers customizations.
-require get_template_directory() . '/inc/http-headers.php';
+require_once get_template_directory() . '/inc/http-headers.php';
 
 // Preview customizations.
 require_once get_template_directory() . '/inc/links.php';
@@ -32,3 +33,4 @@ require_once get_template_directory() . '/inc/cloudfront.php';
 
 // Custom REST API.
 require_once get_template_directory() . '/inc/rest/v1/index.php';
+

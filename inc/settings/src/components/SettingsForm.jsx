@@ -22,13 +22,16 @@ const SettingsForm = () => {
   };
 
   if (!settings) {
-    return "loading";
+    // TODO: add better loading experience
+    return "Loading...";
   }
 
   return (
     <Formik
       initialValues={settings}
+      // TODO: Add validation
       onSubmit={async (values, { setSubmitting }) => {
+        // TODO: add error handling when save fails
         await saveSettings(values);
         setSubmitting(false);
       }}
@@ -36,6 +39,8 @@ const SettingsForm = () => {
       {({ isSubmitting }) => (
         <Form>
           {renderSections()}
+          {/* TODO: Disable button if form does not pass validation */}
+          {/* TODO: add some form of feedback for when save is done successfully */}
           <button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Please wait..." : "Save"}
           </button>

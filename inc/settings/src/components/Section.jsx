@@ -5,6 +5,7 @@ const Section = ({ name, children }) => {
   return (
     <section>
       <h2>{name}</h2>
+      {/* TODO: Add option to add a section description with links to documentation if needed */}
       <ul>{children}</ul>
     </section>
   );

@@ -26,31 +26,23 @@ class Guillotine_Settings {
 				'default'           => '',
 			),
 		),
-		"Examples" => array(
-			'guillotine_textarea' => array(
-				'name'              => 'Example Textarea',
+		"CloudFront" => array(
+			'guillotine_cache_invalidation_endpoint' => array(
+				'name'              => 'Cache Invalidation Endpoint',
 				'order'             => '10',
-				'type'              => 'textarea',
-				'description'       => '',
+				'type'              => 'url',
+				'description'       => 'The endpoint for submitting CloudFront cache invalidation requests.',
 				'show_in_rest'      => true,
 				'default'           => '',
 			),
-			'guillotine_email' => array(
-				'name'              => 'Example Email',
-				'order'             => '30',
-				'type'              => 'email',
-				'description'       => '',
-				'show_in_rest'      => true,
-				'default'           => '',
-			),
-			'guillotine_url' => array(
-				'name'              => 'Example URL',
+			'guillotine_cache_invalidation_status_endpoint' => array(
+				'name'              => 'Cache Invalidation Status Endpoint',
 				'order'             => '20',
 				'type'              => 'url',
-				'description'       => '',
+				'description'       => "The endpoint for checking a CloudFront cache invalidation request's status.",
 				'show_in_rest'      => true,
 				'default'           => '',
-			),
+			)
 		),
 	);
 
