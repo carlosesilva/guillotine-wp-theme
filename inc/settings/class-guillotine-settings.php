@@ -6,7 +6,16 @@
  * @since 1.0.0
  */
 
+/**
+ * Guillotine Settings class
+ */
 class Guillotine_Settings {
+
+	/**
+	 * The theme settings definitions
+	 *
+	 * @var array
+	 */
 	private $settings = array(
 		'Headless'   => array(
 			'guillotine_frontend_url' => array(
@@ -117,6 +126,12 @@ class Guillotine_Settings {
 		}
 	}
 
+	/**
+	 * Normalizes the setting type for use with the wp settings api.
+	 *
+	 * @param string $type The setting type.
+	 * @return string The normalized setting type for use with the wp settings api.
+	 */
 	function normalize_setting_type_for_settings_api( $type ) {
 		return array(
 			'text'     => 'string',
@@ -127,6 +142,12 @@ class Guillotine_Settings {
 		)[ $type ];
 	}
 
+	/**
+	 * Picks the correct wp sanitize function based on the setting type.
+	 *
+	 * @param string $type The setting type.
+	 * @return string The correct wp sanitize function.
+	 */
 	function pick_sanitize_callback_based_on_type( $type ) {
 		return array(
 			'text'     => 'sanitize_text_field',

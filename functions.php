@@ -16,8 +16,8 @@ if ( file_exists( __DIR__ . '/vendor' ) ) {
 }
 
 // Register theme options.
-require_once get_template_directory() . '/inc/settings/main.php';
-// TODO: Check that certain vital settings have a value before enabling some of the other functionality
+require_once get_template_directory() . '/inc/settings/class-guillotine-settings.php';
+// TODO: Check that certain vital settings have a value before enabling some of the other functionality.
 
 // JWT auth functions.
 require_once get_template_directory() . '/inc/jwt.php';
@@ -28,9 +28,8 @@ require_once get_template_directory() . '/inc/http-headers.php';
 // Preview customizations.
 require_once get_template_directory() . '/inc/links.php';
 
-// CloudFront cache invalidation
+// CloudFront cache invalidation.
 require_once get_template_directory() . '/inc/cloudfront.php';
 
 // Custom REST API.
-require_once get_template_directory() . '/inc/rest/v1/index.php';
-
+require_once get_template_directory() . '/inc/rest/v1/class-guillotine-rest-api-controller.php';

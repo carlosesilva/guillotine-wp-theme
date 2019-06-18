@@ -7,12 +7,17 @@
  */
 
 // Import route controllers.
-require_once get_template_directory() . '/inc/rest/v1/menus.php';
-require_once get_template_directory() . '/inc/rest/v1/preview.php';
+require_once get_template_directory() . '/inc/rest/v1/class-guillotine-menus-controller.php';
+require_once get_template_directory() . '/inc/rest/v1/class-guillotine-previews-controller.php';
 
+/**
+ * Guillotine REST API Controller class
+ */
 class Guillotine_Rest_Api_Controller {
 	/**
 	 * REST API namespace
+	 *
+	 * @var string
 	 */
 	public $namespace = 'guillotine/v1';
 

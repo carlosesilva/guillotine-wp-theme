@@ -1,6 +1,8 @@
 <?php
 /**
  * Redirect frontend requests to REST API.
+ *
+ * @package Guillotine
  */
 
 // Redirect individual posts to the REST API endpoint.

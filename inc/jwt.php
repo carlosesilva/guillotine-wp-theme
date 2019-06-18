@@ -20,9 +20,7 @@ define( 'GUILLOTINE_JWT_ALGORITHM', 'HS256' );
  * @return string The newly created jwt token.
  */
 function guillotine_jwt_create_token( $scopes, $ttl ) {
-	$issuedAt       = time();
-	$expirationTime = $issuedAt + $ttl;
-	$payload        = array(
+	$payload = array(
 		'iss'    => get_home_url(),
 		'aud'    => get_field( 'frontend_url', 'option' ),
 		'iat'    => time(),
@@ -48,7 +46,11 @@ function guillotine_jwt_validate_token( $jwt, $scopes ) {
 		if ( is_wp_error( $payload ) ) {
 			return $payload;
 		}
-		return guillotine_jwt_check_scopes( $payload, $scopes );
+		$has_proper_scopes = guillotine_jwt_check_scopes( $payload, $scopes );
+		if ( ! $has_proper_scopes ) {
+			return new WP_ERROR( 'Invalid token', 'Token does not have the proper scopes.' );
+		}
+		return true;
 	} catch ( Exception $e ) {
 		return new WP_ERROR( 'Invalid token', $e->getMessage() );
 	}
@@ -74,11 +76,11 @@ function guillotine_jwt_decode_token( $jwt ) {
  *
  * @param object $payload The decoded JWT payload object.
  * @param array  $scopes The scopes the token is expected to have.
- * @return void
+ * @return bool Return true if jwt has the proper scopes or false
  */
 function guillotine_jwt_check_scopes( $payload, $scopes ) {
 	if ( count( $scopes ) !== count( array_intersect( $scopes, $payload->scopes ) ) ) {
-		throw new Exception( 'Token does not have the proper scopes.' );
+		return false;
 	}
 	return true;
 }

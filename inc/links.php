@@ -9,14 +9,15 @@
 /**
  * Customize the preview button in the WordPress admin to point to the guillotine client.
  *
- * @param  str $link The WordPress preview link.
+ * @param string $link The WordPress preview link.
+ * @param object $post The WordPress post object.
  * @return str The guillotine WordPress preview link.
  */
 function guillotine_filter_preview_link( $link, $post = null ) {
 	$frontend_url = get_option( 'guillotine_frontend_url' );
 
 	// Get global post if a post was not passed in.
-	if ( $post === null ) {
+	if ( null === $post ) {
 		$post = get_post();
 	}
 
@@ -43,18 +44,19 @@ add_filter( 'preview_post_link', 'guillotine_filter_preview_link', 99, 2 );
 /**
  * Customize the post permalink to point to the guillotine client.
  *
- * @param  str $url The WordPress post permalink.
- * @return str The static permalink.
+ * @param string $url The WordPress post permalink.
+ * @param object $post The WordPress post object.
+ * @return string The static permalink.
  */
 function guillotine_filter_permalink( $url, $post = null ) {
 	$frontend_url = get_option( 'guillotine_frontend_url' );
 
 	// Get global post if a post was not passed in.
-	if ( $post === null ) {
+	if ( null === $post ) {
 		$post = get_post();
 	}
 
-	if ( $post->post_status !== 'publish' ) {
+	if ( 'publish' !== $post->post_status ) {
 		$filtered = guillotine_filter_preview_link( $url );
 		return $filtered;
 	}

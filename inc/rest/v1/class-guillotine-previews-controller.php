@@ -6,15 +6,22 @@
  * @since 1.0.0
  */
 
+/**
+ * Guillotine Previews Controller class
+ */
 class Guillotine_Previews_Controller extends WP_REST_Controller {
 
 	/**
 	 * REST API route base
+	 *
+	 * @var string
 	 */
 	public $base = 'previews';
 
 	/**
 	 * Constructor
+	 *
+	 * @param string $namespace The rest api route namespace.
 	 */
 	public function __construct( $namespace ) {
 		$this->namespace = $namespace;
@@ -65,7 +72,7 @@ class Guillotine_Previews_Controller extends WP_REST_Controller {
 		$post = $posts[0];
 
 		// Depending on the post status, get the post appropriate preview object.
-		if ( $post->post_status === 'publish' ) {
+		if ( 'publish' === $post->post_status ) {
 			$item = wp_get_post_autosave( $post->ID );
 		} else {
 			$revisions = wp_get_post_revisions(
