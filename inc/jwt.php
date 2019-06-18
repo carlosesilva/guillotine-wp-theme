@@ -9,7 +9,7 @@
 use \Firebase\JWT\JWT;
 
 // Define JWT constants.
-define( "GUILLOTINE_JWT_KEY", get_field('jwt_secret_key', 'option' ) );
+define( "GUILLOTINE_JWT_KEY", get_option('guillotine_jwt_secret') );
 define( "GUILLOTINE_JWT_ALGORITHM", "HS256" );
 
 /**

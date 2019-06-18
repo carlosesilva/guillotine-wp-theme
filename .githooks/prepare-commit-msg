@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#
+# This hook extracts the Jira task name from your branch & prepends it to all commit messages
+# If it can't extract a proper task name, it doesn't prepend anything and goes about normally
+#
+
+# get the Jira task name
+BRANCH=$(git branch | grep '*' | sed 's/* //')
+TASK=$(echo $BRANCH | grep -i 'acd-[0-9]*' -o)
+
+# if task name exists, print it, otherwise, print branch name
+if [ -n "$TASK" ]; then
+  sed -i.bak -e "1s/^/$TASK | /" $1
+fi

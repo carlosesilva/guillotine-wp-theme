@@ -1,6 +1,12 @@
-.vscode
+!.vscode/
+.vscode/*
+!.vscode/settings.json
+.current-local-setup-version
 node_modules/
 
 # Composer
 composer.phar
 /vendor/
+
+# Webpack
+/dist/
