@@ -33,11 +33,11 @@ const SettingsForm = () => {
         setSubmitting(false);
       }}
     >
-      {props => (
+      {({ isSubmitting }) => (
         <Form>
           {renderSections()}
-          <button type="submit" disabled={props.isSubmitting}>
-            {props.isSubmitting ? "Please wait..." : "Save"}
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Please wait..." : "Save"}
           </button>
         </Form>
       )}
