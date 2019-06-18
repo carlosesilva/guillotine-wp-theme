@@ -47,9 +47,9 @@ class Guillotine_Settings {
 	);
 
 	/**
-   * Constructor
-   */
-  public function __construct() {
+	 * Constructor
+	 */
+	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'guillotine_register_settings_page' ) );
 		add_action( 'admin_init', array( $this, 'guillotine_register_settings' ) );
 		add_action( 'rest_api_init', array( $this, 'guillotine_register_settings' ) );
