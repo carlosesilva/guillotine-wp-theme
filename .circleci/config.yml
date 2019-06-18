@@ -1,0 +1,87 @@
+version: 2.1
+jobs:
+  dependencies:
+    docker:
+      - image: circleci/php:7.2-node
+    steps:
+      - checkout
+      - run: sudo composer self-update
+      - restore_cache:
+          keys:
+            - composer-v1-{{ checksum "composer.lock" }}
+            - composer-v1-
+      - run:
+          name: Install composer dependencies
+          command: composer install -n --prefer-dist --no-interaction
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      - run:
+          name: Update npm
+          command: sudo npm install -g npm@latest
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install NPM packages
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - persist_to_workspace: # Persist files so that we can use it in the deploy job
+          root: .
+          paths: "*"
+  lint-php:
+    docker:
+      - image: circleci/php:7.2-node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Lint PHP
+          command: npm run lint:php
+  lint-js:
+    docker:
+      - image: circleci/php:7.2-node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Lint JS
+          command: npm run lint:js
+  lint-styles:
+    docker:
+      - image: circleci/php:7.2-node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Lint styles
+          command: npm run lint:styles
+  build:
+    docker:
+      - image: circleci/php:7.2-node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Build theme
+          command: npm run build
+workflows:
+  version: 2
+  build_lint:
+    jobs:
+      - dependencies
+      - lint-php:
+          requires:
+            - dependencies
+      - lint-js:
+          requires:
+            - dependencies
+      - lint-styles:
+          requires:
+            - dependencies
+      - build:
+          requires:
+            - dependencies

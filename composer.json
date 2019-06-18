@@ -11,5 +11,10 @@
             "name": "Carlos E. Silva",
             "email": "casilva@redventures.com"
         }
-    ]
+    ],
+    "require-dev": {
+        "wp-coding-standards/wpcs": "^2.1",
+        "squizlabs/php_codesniffer": "^3.4",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0"
+    }
 }

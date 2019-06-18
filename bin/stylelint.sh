@@ -9,7 +9,7 @@ msg() {
 # Get file count for a specific file extension
 file_count() {
     ext=$1
-    find . -type f -iname "*$ext" ! -path "./node_modules/*" ! -path "./dist/*" ! -path "./.next/*" ! -path "./styleguide/*"| wc -l
+    find . -type f -iname "*$ext" ! -path "./node_modules/*" ! -path "./vendor/*" ! -path "./dist/*" | wc -l
 }
 
 # Set script status to passing
