@@ -9,6 +9,7 @@
 // Import route controllers.
 require_once get_template_directory() . '/inc/rest/v1/class-guillotine-menus-controller.php';
 require_once get_template_directory() . '/inc/rest/v1/class-guillotine-previews-controller.php';
+require_once get_template_directory() . '/inc/rest/v1/class-guillotine-content-controller.php';
 
 /**
  * Guillotine REST API Controller class
@@ -27,6 +28,7 @@ class Guillotine_Rest_Api_Controller {
 	public function __construct() {
 		$this->menus_controller    = new Guillotine_Menus_Controller( $this->namespace );
 		$this->previews_controller = new Guillotine_Previews_Controller( $this->namespace );
+		$this->content_controller  = new Guillotine_Content_Controller( $this->namespace );
 	}
 }
 $guillotine_rest_api_controller = new Guillotine_Rest_Api_Controller();
