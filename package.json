@@ -6,8 +6,10 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "npm run setup:check && webpack --watch --mode development",
-    "lint": "npm run lint:js; npm run lint:styles",
+    "lint": "npm run lint:js; npm run lint:php; npm run lint:styles",
     "lint:js": "NODE_ENV=production eslint --ext .jsx --ext .js .",
+    "lint:php": "./vendor/bin/phpcs --standard=phpcs.xml.dist",
+    "lint:php-autofix": "./vendor/bin/phpcbf --standard=phpcs.xml.dist --report-summary --report-source",
     "lint:styles": "./bin/stylelint.sh",
     "setup:check": "./bin/setup.sh check",
     "setup:update": "./bin/setup.sh update",

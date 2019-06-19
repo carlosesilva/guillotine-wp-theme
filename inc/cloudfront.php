@@ -15,7 +15,7 @@ add_action( 'admin_menu', 'register_cloudfront_cache_buster' );
  * Add a menu page for the CloudFront Cache Invalidator
  */
 function register_cloudfront_cache_buster() {
-	add_menu_page( 'Bust CloudFront Cache', 'CloudFront Cache', 'manage_options', 'cache_invalidator', 'cloudfront_cache_invalidator');
+	add_menu_page( 'Bust CloudFront Cache', 'CloudFront Cache', 'manage_options', 'cache_invalidator', 'cloudfront_cache_invalidator' );
 }
 
 /**
@@ -26,8 +26,8 @@ function cloudfront_cache_invalidator() {
 	<script type="text/javascript">
 	document.addEventListener('DOMContentLoaded', () => {
 		// Some global vars
-		const cacheInvalidationEndpoint = '<?php echo get_field('cache_invalidation_endpoint', 'option' ); ?>';
-		const cacheInvalidationStatusEndpoint = '<?php echo get_field('cache_invalidation_status_endpoint', 'option' ); ?>';
+		const cacheInvalidationEndpoint = '<?php echo get_field( 'cache_invalidation_endpoint', 'option' ); ?>';
+		const cacheInvalidationStatusEndpoint = '<?php echo get_field( 'cache_invalidation_status_endpoint', 'option' ); ?>';
 		let interval;
 
 		// DOM Elements

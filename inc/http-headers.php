@@ -13,10 +13,10 @@
  * @return array The filterd array of http headers.
  */
 function allconnect_filter_wp_headers( $headers ) {
-  // Prevent clickjacking.
-  $headers['X-Frame-Options'] = 'sameorigin';
+	// Prevent clickjacking.
+	$headers['X-Frame-Options'] = 'sameorigin';
 
-  return $headers; 
+	return $headers;
 };
 add_filter( 'wp_headers', 'allconnect_filter_wp_headers', 10, 1 );
 
@@ -26,9 +26,9 @@ add_filter( 'wp_headers', 'allconnect_filter_wp_headers', 10, 1 );
  * @param array $urls The list of CORS allowed urls.
  * @return array The filtered array.
  */
-function guillotine_allowed_origins($urls) {
-  $frontend_url = get_option('guillotine_frontend_url');
-  $urls[] = $frontend_url;
-  return $urls;
+function guillotine_allowed_origins( $urls ) {
+	$frontend_url = get_option( 'guillotine_frontend_url' );
+	$urls[]       = $frontend_url;
+	return $urls;
 }
-add_filter('allowed_http_origins', 'guillotine_allowed_origins');
+add_filter( 'allowed_http_origins', 'guillotine_allowed_origins' );
