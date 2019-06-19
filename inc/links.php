@@ -66,4 +66,13 @@ function guillotine_filter_permalink( $url, $post = null ) {
 	. '/' . $post->ID
 	. '/';
 }
-add_filter( 'post_link', 'guillotine_filter_permalink', 99, 2 );
+
+/*
+ * Commented out b/c conflicts with REST api to retrieve
+ * post by URL.
+ * TODO: We'll need to find another way to mask
+ * the "view" URLs in the wp-admin.
+ */
+// phpcs:ignore
+// add_filter( 'post_link', 'guillotine_filter_permalink', 99, 2 );
+
