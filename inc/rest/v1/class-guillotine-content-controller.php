@@ -132,8 +132,6 @@ class Guillotine_Content_Controller extends WP_REST_Controller {
 		 *
 		 * The dynamic portion of the hook name, `$this->post_type`, refers to the post type slug.
 		 *
-		 * @since 4.7.0
-		 *
 		 * @param WP_REST_Response $response The response object.
 		 * @param WP_Post          $post     Post object.
 		 * @param WP_REST_Request  $request  Request object.
@@ -143,8 +141,6 @@ class Guillotine_Content_Controller extends WP_REST_Controller {
 
 	/**
 	 * Retrieves the post's schema, conforming to JSON Schema.
-	 *
-	 * @since 4.7.0
 	 *
 	 * @return array Item schema data.
 	 */
