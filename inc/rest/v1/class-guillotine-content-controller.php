@@ -20,7 +20,7 @@ class Guillotine_Content_Controller extends WP_REST_Controller {
 	public $base = 'content';
 
 	/**
-	 * The post type being currently requested
+	 * Keeps track of the post type being currently requested
 	 *
 	 * @var string
 	 */
