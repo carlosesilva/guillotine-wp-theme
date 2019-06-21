@@ -13,13 +13,13 @@
  *
  * @return array The filterd array of http headers.
  */
-function allconnect_filter_wp_headers( $headers ) {
+function guillotine_filter_wp_headers( $headers ) {
 	// Prevent clickjacking.
 	$headers['X-Frame-Options'] = 'sameorigin';
 
 	return $headers;
 };
-add_filter( 'wp_headers', 'allconnect_filter_wp_headers', 10, 1 );
+add_filter( 'wp_headers', 'guillotine_filter_wp_headers', 10, 1 );
 
 /**
  * Filter list of allowed http origins
