@@ -3,6 +3,7 @@
  * HTTP Headers customizations
  *
  * @package Guillotine
+ * @since 1.0.0
  */
 
 /**

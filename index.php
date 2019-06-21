@@ -3,6 +3,7 @@
  * Redirect frontend requests to REST API.
  *
  * @package Guillotine
+ * @since 1.0.0
  */
 
 // Redirect individual posts to the REST API endpoint.
