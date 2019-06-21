@@ -19,6 +19,11 @@ function guillotine_filter_preview_link( $link, $post = null ) {
 	// Get global post if a post was not passed in.
 	if ( null === $post ) {
 		$post = get_post();
+
+		// If it's still null, just return the link argument.
+		if ( is_null( $post ) ) {
+			return $link;
+		}
 	}
 
 	// Generate jwt token.
@@ -54,6 +59,11 @@ function guillotine_filter_permalink( $url, $post = null ) {
 	// Get global post if a post was not passed in.
 	if ( null === $post ) {
 		$post = get_post();
+
+		// If it's still null, just return the url argument.
+		if ( is_null( $post ) ) {
+			return $url;
+		}
 	}
 
 	if ( 'publish' !== $post->post_status ) {
