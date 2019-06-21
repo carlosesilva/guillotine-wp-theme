@@ -16,6 +16,13 @@ require_once get_template_directory() . '/inc/rest/v1/class-guillotine-content-c
  */
 class Guillotine_Rest_Api_Controller {
 	/**
+	 * Singleton Instance
+	 *
+	 * @var string
+	 */
+	private static $instance = null;
+
+	/**
 	 * REST API namespace
 	 *
 	 * @var string
@@ -30,5 +37,16 @@ class Guillotine_Rest_Api_Controller {
 		$this->previews_controller = new Guillotine_Previews_Controller( $this->namespace );
 		$this->content_controller  = new Guillotine_Content_Controller( $this->namespace );
 	}
+
+	/**
+	 * Initialize singleton
+	 *
+	 * @return void
+	 */
+	public static function init() {
+		if ( null === self::$instance ) {
+			self::$instance = new Guillotine_Rest_Api_Controller();
+		}
+	}
 }
-$guillotine_rest_api_controller = new Guillotine_Rest_Api_Controller();
+add_action( 'rest_api_init', 'Guillotine_Rest_Api_Controller::init' );
