@@ -110,7 +110,7 @@ class Guillotine_Menus_Controller extends WP_REST_Controller {
 	 */
 	public function api_get_parent_link_index( $child, $menu ) {
 		foreach ( $menu as $index => $value ) {
-			if ( $value['ID'] === $child['menu_item_parent'] ) {
+			if ( (int) $value['ID'] === (int) $child['menu_item_parent'] ) {
 				return $index;
 			}
 		}
