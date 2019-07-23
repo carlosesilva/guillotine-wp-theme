@@ -33,14 +33,13 @@ function guillotine_filter_preview_link( $link, $post = null ) {
 
 	// Set query params.
 	$params = array(
+		'id' => $post->ID,
 		'token' => $jwt,
 	);
 
 	// Build preview url.
 	$filtered = $frontend_url
-	. '/_preview'
-	. '/' . $post->ID
-	. '?' . build_query( $params );
+	. '/_preview/?' . build_query( $params );
 
 	return $filtered;
 }
@@ -54,8 +53,6 @@ add_filter( 'preview_post_link', 'guillotine_filter_preview_link', 99, 2 );
  * @return string The static permalink.
  */
 function guillotine_filter_permalink( $url, $post = null ) {
-	$frontend_url = get_option( 'guillotine_frontend_url' );
-
 	// Get global post if a post was not passed in.
 	if ( null === $post ) {
 		$post = get_post();
@@ -71,18 +68,8 @@ function guillotine_filter_permalink( $url, $post = null ) {
 		return $filtered;
 	}
 
-	return $frontend_url
-	. '/post'
-	. '/' . $post->ID
-	. '/';
+	return $url;
 }
 
-/*
- * Commented out b/c conflicts with REST api to retrieve
- * post by URL.
- * TODO: We'll need to find another way to mask
- * the "view" URLs in the wp-admin.
- */
-// phpcs:ignore
-// add_filter( 'post_link', 'guillotine_filter_permalink', 99, 2 );
+add_filter( 'post_link', 'guillotine_filter_permalink', 99, 2 );
 

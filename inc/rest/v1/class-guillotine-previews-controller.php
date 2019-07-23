@@ -34,12 +34,12 @@ class Guillotine_Previews_Controller extends WP_REST_Controller {
 	public function register_routes() {
 		register_rest_route(
 			$this->namespace,
-			'/' . $this->base . '/(?P<id>[\d]+)',
+			'/' . $this->base,
 			array(
 				array(
 					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_preview' ),
-					'permission_callback' => array( $this, 'get_preview_permissions_check' ),
+					'callback'            => array( $this, 'get_item' ),
+					'permission_callback' => array( $this, 'get_item_permissions_check' ),
 				),
 			)
 		);
@@ -51,7 +51,7 @@ class Guillotine_Previews_Controller extends WP_REST_Controller {
 	 * @param WP_REST_Request $request Full data about the request.
 	 * @return WP_Error|WP_REST_Response
 	 */
-	public function get_preview( $request ) {
+	public function get_item( $request ) {
 		$post_id = (int) $request->get_param( 'id' );
 		if ( $post_id <= 0 ) {
 			return new WP_Error( 'rest_post_invalid_id', __( 'Invalid post ID.' ), array( 'status' => 404 ) );
@@ -98,7 +98,7 @@ class Guillotine_Previews_Controller extends WP_REST_Controller {
 	 * @param WP_REST_Request $request Full data about the request.
 	 * @return WP_Error|bool
 	 */
-	public function get_preview_permissions_check( $request ) {
+	public function get_item_permissions_check( $request ) {
 		$post_id = (int) $request->get_param( 'id' );
 		if ( $post_id <= 0 ) {
 			return new WP_Error( 'rest_post_invalid_id', __( 'Invalid post ID.' ), array( 'status' => 404 ) );
