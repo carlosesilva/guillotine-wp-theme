@@ -79,9 +79,13 @@ class Guillotine_Previews_Controller extends WP_REST_Posts_Controller {
 		}
 		$post = $posts[0];
 
+		// Save the current post type to a class variable so that we can access it in get_item_schema().
+		$this->post_type = $post->post_type;
+		$this->meta      = new WP_REST_Post_Meta_Fields( $this->post_type );
+
 		// Depending on the post status, get the post appropriate preview object.
 		if ( 'publish' === $post->post_status ) {
-			$item = wp_get_post_autosave( $post->ID );
+			$preview = wp_get_post_autosave( $post->ID );
 		} else {
 			$revisions = wp_get_post_revisions(
 				$post->ID,
@@ -89,18 +93,14 @@ class Guillotine_Previews_Controller extends WP_REST_Posts_Controller {
 					'numberposts' => 1,
 				)
 			);
-			$item      = count( $revisions ) > 0 ? array_shift( $revisions ) : null;
+			$preview      = count( $revisions ) > 0 ? array_shift( $revisions ) : null;
 		}
 
-		if ( ! isset( $item ) ) {
+		if ( !$preview ) {
 			return new WP_Error( 'rest_post_no_preview', __( 'No preview was found' ), array( 'status' => '404' ) );
 		}
 
-		// Save the current post type to a class variable so that we can access it in get_item_schema().
-		$this->post_type = $post->post_type;
-		$this->meta      = new WP_REST_Post_Meta_Fields( $this->post_type );
-
-		$data     = $this->prepare_item_for_response( $item, $request );
+		$data     = $this->prepare_preview_item_for_response( $post, $preview, $request );
 		$response = rest_ensure_response( $data );
 
 		return $response;
@@ -136,5 +136,24 @@ class Guillotine_Previews_Controller extends WP_REST_Posts_Controller {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Prepares a single post output for response.
+	 *
+	 * @param WP_Post         $post    Post object.
+	 * @param WP_Post         $preview Preview post object.
+	 * @param WP_REST_Request $request Request object.
+	 * @return WP_REST_Response Response object.
+	 */
+	public function prepare_preview_item_for_response( $post, $preview, $request ) {
+		$post_data = $this->prepare_item_for_response( $post, $request );
+		$preview_data = $this->prepare_item_for_response( $preview, $request )->data;
+
+		$post_data->data["title"] = $preview_data["title"];
+		$post_data->data["content"] = $preview_data["content"];
+		$post_data->data["excerpt"] = $preview_data["excerpt"];
+
+		return rest_ensure_response( $post_data );
 	}
 }
