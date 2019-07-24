@@ -28,7 +28,7 @@ function guillotine_filter_preview_link( $link, $post = null ) {
 
 	// Generate jwt token.
 	$scopes = array( 'preview', 'preview_' . $post->ID );
-	$ttl    = 60; // Todo: pick the appropriate preview link TTL.
+	$ttl    = 86400; // 86400 seconds = 24hours
 	$jwt    = guillotine_jwt_create_token( $scopes, $ttl );
 
 	// Set query params.
