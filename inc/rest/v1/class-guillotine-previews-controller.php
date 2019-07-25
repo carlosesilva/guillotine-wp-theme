@@ -148,11 +148,11 @@ class Guillotine_Previews_Controller extends WP_REST_Posts_Controller {
 	 */
 	public function prepare_preview_item_for_response( $post, $preview, $request ) {
 		$post_data = $this->prepare_item_for_response( $post, $request );
-		$preview_data = $this->prepare_item_for_response( $preview, $request )->data;
+		$preview_data = $this->prepare_item_for_response( $preview, $request );
 
-		$post_data->data["title"] = $preview_data["title"];
-		$post_data->data["content"] = $preview_data["content"];
-		$post_data->data["excerpt"] = $preview_data["excerpt"];
+		$post_data->data["title"] = $preview_data->data["title"];
+		$post_data->data["content"] = $preview_data->data["content"];
+		$post_data->data["excerpt"] = $preview_data->data["excerpt"];
 
 		return rest_ensure_response( $post_data );
 	}
