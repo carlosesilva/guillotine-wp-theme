@@ -33,7 +33,7 @@ function guillotine_filter_preview_link( $link, $post = null ) {
 
 	// Set query params.
 	$params = array(
-		'id' => $post->ID,
+		'id'    => $post->ID,
 		'token' => $jwt,
 	);
 
@@ -64,7 +64,7 @@ function guillotine_filter_permalink( $url, $post = null ) {
 	}
 
 	if ( 'publish' !== $post->post_status ) {
-		$parent = get_post($post->post_parent);
+		$parent   = get_post( $post->post_parent );
 		$filtered = guillotine_filter_preview_link( $url, $parent );
 		return $filtered;
 	}

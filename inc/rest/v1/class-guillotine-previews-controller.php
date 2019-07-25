@@ -93,10 +93,10 @@ class Guillotine_Previews_Controller extends WP_REST_Posts_Controller {
 					'numberposts' => 1,
 				)
 			);
-			$preview      = count( $revisions ) > 0 ? array_shift( $revisions ) : null;
+			$preview   = count( $revisions ) > 0 ? array_shift( $revisions ) : null;
 		}
 
-		if ( !$preview ) {
+		if ( ! $preview ) {
 			return new WP_Error( 'rest_post_no_preview', __( 'No preview was found' ), array( 'status' => '404' ) );
 		}
 
@@ -147,12 +147,12 @@ class Guillotine_Previews_Controller extends WP_REST_Posts_Controller {
 	 * @return WP_REST_Response Response object.
 	 */
 	public function prepare_preview_item_for_response( $post, $preview, $request ) {
-		$post_data = $this->prepare_item_for_response( $post, $request );
+		$post_data    = $this->prepare_item_for_response( $post, $request );
 		$preview_data = $this->prepare_item_for_response( $preview, $request );
 
-		$post_data->data["title"] = $preview_data->data["title"];
-		$post_data->data["content"] = $preview_data->data["content"];
-		$post_data->data["excerpt"] = $preview_data->data["excerpt"];
+		$post_data->data['title']   = $preview_data->data['title'];
+		$post_data->data['content'] = $preview_data->data['content'];
+		$post_data->data['excerpt'] = $preview_data->data['excerpt'];
 
 		return rest_ensure_response( $post_data );
 	}
