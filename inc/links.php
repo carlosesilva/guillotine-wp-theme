@@ -64,7 +64,8 @@ function guillotine_filter_permalink( $url, $post = null ) {
 	}
 
 	if ( 'publish' !== $post->post_status ) {
-		$filtered = guillotine_filter_preview_link( $url );
+		$parent = get_post($post->post_parent);
+		$filtered = guillotine_filter_preview_link( $url, $parent );
 		return $filtered;
 	}
 
